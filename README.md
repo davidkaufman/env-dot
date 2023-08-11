@@ -37,10 +37,14 @@ its counterpart in the environment. For instance:
     If your `.env` file is located in another path,
     not the current working directory,
     you can use the environment variable
-    **DOTENV_FILEPATHS> to tell where your dotenv file is located.
+    **ENVDOT_FILEPATHS> to tell where your dotenv file is located.
     You can specify several file paths; just separate
-    them by B<:>. Dot::Env will load all the files in the order
-    you specify them.
+    them by B<:>. Env::Dot will load all the files in the order
+    you specify them, starting from the last, i.e. in reversed order.
+    This is the same ordering as used in B<PATH> variable:
+    the first overrules the following ones, that is, when reading from the last path
+    to the first path, if same variable is present in more than one file, the later
+    one replaces the one already read.
 
 * Support different types of .env files
     Unix Shell `source` command compatible dotenv files use double or single quotation marks
@@ -70,7 +74,7 @@ If you have several `.env` files, you can read them in at one go
 with the help of the environment variable **ENVDOT_FILEPATHS**.
 Separate the full paths with **:** character.
 
-If you have set the variable **DOTENV_FILEPATH**, then **envdot** will use that.
+If you have set the variable **ENVDOT_FILEPATHS**, then **envdot** will use that.
 Otherwise, it respects the command line parameter.
 If no parameter, then default value is used. Default is the file
 `.env` in the current directory.

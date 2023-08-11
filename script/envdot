@@ -165,10 +165,16 @@ the B<docker> flavor which are not compatible with each other.
 
 If you have several F<.env> files, you can read them in at one go
 with the help of the environment variable B<ENVDOT_FILEPATHS>.
-Separate the full paths with B<:> character.
+Separate the full paths with 'B<:>' character.
 
-If you have set the variable DOTENV_FILEPATH, then B<envdot> will use that.
-Otherwise, it respects the command line parameter.
+Env::Dot will load the files in the B<reverse order>,
+starting from the last. This is the same ordering as used in B<PATH> variable:
+the first overrules the following ones, that is, when reading from the last path
+to the first path, if same variable is present in more than one file, the later
+one replaces the one already read.
+
+If you have set the variable ENVDOT_FILEPATHS, then B<envdot> will use that.
+Otherwise, it uses the command line parameter.
 If no parameter, then default value is used. Default is the file
 F<.env> in the current directory.
 

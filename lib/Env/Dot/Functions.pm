@@ -64,13 +64,16 @@ This list is created in the same order the variables
 are read from the files and may therefore contain
 the same variable several times.
 
+The files, however, are read in reversed order, just like
+paths in variable B<PATH> are used.
+
 =cut
 
 sub get_dotenv_vars {
     my @dotenv_filepaths = @_;
 
     my @vars;
-    foreach my $filepath (@dotenv_filepaths) {
+    foreach my $filepath (reverse @dotenv_filepaths) {
         if( -f $filepath ) {
             my @rows = _read_dotenv_file( $filepath );
             my @tmp = _interpret_dotenv( @rows );
